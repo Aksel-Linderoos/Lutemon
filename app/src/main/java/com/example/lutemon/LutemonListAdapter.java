@@ -9,36 +9,37 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
 
-public class NoteListAdapter extends RecyclerView.Adapter<NoteViewHolder> {
-
-    private Context context;
-    public ArrayList<Note> Notes;
-
-    {
-        NoteStorage.getInstance();
-    }
-
-    public NoteListAdapter(Context context, ArrayList<Note> Notes){
-        this.context= context;
-        this.Notes = Notes;
-    }
-
-    @NonNull
-    @Override
-    public NoteViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
-        return new NoteViewHolder(LayoutInflater.from(context).inflate(R.layout.note_view, parent, false));
-    }
-
-    @Override
-    public void onBindViewHolder(@NonNull NoteViewHolder holder, int position) {
-        holder.noteTitleText.setText(Notes.get(position).getTitle() );
-        holder.noteContentText.setText(Notes.get(position).getContent());
-        holder.noteIdText.setText(Notes.get(position).getIdAsString());
-        holder.noteTimeAndDateText.setText(Notes.get(position).getTimeAndDate());
-    }
-
-    @Override
-    public int getItemCount() {
-        return Notes.size();
-    }
-}
+//public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> {
+//
+//    private Context context;
+//    public ArrayList<Lutemon> Lutemons;
+//
+//    {
+//        Storage.getInstance();
+//    }
+//
+//    public LutemonListAdapter(Context context, ArrayList<Lutemon> Lutemons){
+//        this.context= context;
+//        this.Lutemons = Lutemons;
+//    }
+//
+//    @NonNull
+//    @Override
+//    public LutemonViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
+//        return new LutemonViewHolder(LayoutInflater.from(context).inflate(R.layout.LutemonView, parent, false));
+//    }
+//
+//    @Override
+//    public void onBindViewHolder(@NonNull LutemonViewHolder holder, int position) {
+//        holder.nameText.setText(Lutemons.get(position).getName() );
+//        holder.levelText.setText(Lutemons.get(position).getLevel());
+//        holder.hpText.setText(Lutemons.get(position).getHP());
+//        holder.attackText.setText(Lutemons.get(position).getAttack());
+//        holder.defText.setText(Lutemons.get(position).getDefence());
+//    }
+//
+//    @Override
+//    public int getItemCount() {
+//        return Lutemons.size();
+//    }
+//}
