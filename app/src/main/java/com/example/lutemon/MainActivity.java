@@ -30,6 +30,9 @@ public class MainActivity extends AppCompatActivity {
         frameLayout = (FrameLayout) findViewById(R.id.framelayout);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
 
+        Lutemon test = new WaterType("TestName");
+        test.Defense(test);
+
         tabLayout.selectTab(tabLayout.getTabAt(1));
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, new Home()).addToBackStack(null).commit();
 
