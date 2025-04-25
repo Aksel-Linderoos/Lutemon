@@ -27,6 +27,7 @@ public class Lutemon {
         this.is_blocking = false;
 
         Lutemon.number_created += 1;
+        Storage storage = Storage.getInstance();
     }
 
     public String GetName() { return this.name; }

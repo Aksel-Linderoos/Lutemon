@@ -27,6 +27,10 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        Lutemon lutemon = new Lutemon("ASD", LutemonType.GRASS);
+        Storage storage = Storage.getInstance();
+        storage.addLutemon(lutemon);
         frameLayout = (FrameLayout) findViewById(R.id.framelayout);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
 
