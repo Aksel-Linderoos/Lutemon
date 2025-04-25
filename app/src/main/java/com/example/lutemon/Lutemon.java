@@ -1,15 +1,19 @@
 package com.example.lutemon;
 
-public abstract class Lutemon {
-    protected String name;
-    protected LutemonType type;
-    protected int attack;
-    protected int defense;
-    protected int experience;
-    protected int level;
-    protected int health;
-    protected int max_health;
-    private int number_created = 0;
+import java.util.Random;
+
+public class Lutemon {
+    private String name;
+    private LutemonType type;
+    private int attack;
+    private int defense;
+    private int experience;
+    private int level;
+    private int health;
+    private int max_health;
+    private boolean is_blocking;
+
+    public static int number_created = 0;
 
     public Lutemon(String name, LutemonType type) {
         this.name = name;
@@ -20,13 +24,86 @@ public abstract class Lutemon {
         this.level = 1;
         this.health = 10;
         this.max_health = 10;
+        this.is_blocking = false;
 
-        this.number_created += 1;
+        Lutemon.number_created += 1;
     }
 
-    public abstract void Defense(Lutemon attacker);
+    public String GetName() { return this.name; }
+    public LutemonType GetType() { return this.type; }
+    public int GetAttack() { return this.attack; }
+    public int GetDefense() { return this.defense; }
+    public int GetExperience() { return this.experience; }
+    public int GetLevel() { return this.level; }
+    public int GetHealth() { return this.health; }
+    public int GetMaxHealth() { return this.max_health; }
 
-    final public int GetLutemonsCreated() {
-        return this.number_created;
+    public float GetAccuracy(int attack, int defense) {
+        return Math.max(attack - defense * 0.5f, 0.f);
     }
+
+    private void TakeDamage(int damage) {
+        this.health -= damage;
+
+        if (this.is_blocking) {
+            this.is_blocking = false;
+            this.defense /= 2;
+        }
+    }
+
+    private void LevelUp() {
+        this.attack += 1;
+        this.defense += 1;
+        this.max_health += 3;
+    }
+
+    public void GainExperience(int experience) {
+        this.experience += experience;
+        int new_level = this.experience / (this.level * 10 + 90);
+
+        if (new_level != this.level) {
+            int level_ups = new_level - this.level;
+            this.level = new_level;
+
+            for (int i = 0; i < level_ups; ++i)
+                LevelUp();
+        }
+    }
+
+    public void Attack(Lutemon defender, boolean try_strong) {
+        float accuracy = GetAccuracy(this.attack, defender.defense);
+
+        if (try_strong) {
+            Random gen = new Random();
+            if (!gen.nextBoolean()) {
+                System.out.println("Heavy attack missed!");
+                return;
+            }
+            else accuracy *= 2;
+        }
+
+        LutemonType vulnerable = TypeHelper.GetVulnerability(this.type);
+        LutemonType advantage = TypeHelper.GetAdvantage(this.type);
+
+        if (defender.type == vulnerable) {
+            if (accuracy == 0) defender.health -= 2;
+            else defender.health -= (int)(accuracy * 2.f);
+        }
+
+        else if (defender.type == advantage) {
+            if (accuracy == 0) defender.health -= 1;
+            else defender.health -= (int)(accuracy * 0.5f);
+        }
+
+        else {
+            if (accuracy == 0) defender.health -= 1;
+            else defender.health -= (int)(accuracy);
+        }
+    }
+
+    public void Defend() {
+        this.is_blocking = true;
+        this.defense *= 2;
+    }
+
 }
