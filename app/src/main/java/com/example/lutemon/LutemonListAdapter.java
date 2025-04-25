@@ -12,15 +12,12 @@ import java.util.ArrayList;
 public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> {
 
    private Context context;
-   public ArrayList<Lutemon> Lutemons;
+   private ArrayList<Lutemon> lutemons;
 
-   {
-        Storage.getInstance();
-    }
-
-    public LutemonListAdapter(Context context, ArrayList<Lutemon> Lutemons){
+   public LutemonListAdapter(Context context, ArrayList<Lutemon> lutemons){
         this.context= context;
-        this.Lutemons = Lutemons;    }
+        this.lutemons = lutemons;
+   }
 
     @NonNull
     @Override
@@ -30,15 +27,16 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> 
 
     @Override
     public void onBindViewHolder(@NonNull LutemonViewHolder holder, int position) {
-        holder.nameText.setText(Lutemons.get(position).GetName() );
-        holder.levelText.setText(Lutemons.get(position).GetLevel());
-        holder.hpText.setText(Lutemons.get(position).GetMaxHealth());
-        holder.attackText.setText(Lutemons.get(position).GetAttack());
-        holder.defText.setText(Lutemons.get(position).GetDefense());
+        Lutemon lutemon = lutemons.get(position);
+        holder.nameText.setText(String.format("NAME: %s", lutemon.GetName()));
+        holder.levelText.setText(String.format("LVL: %d", lutemon.GetLevel()));
+        holder.hpText.setText(String.format("HP: %d / %d", lutemon.GetHealth(), lutemon.GetMaxHealth()));
+        holder.attackText.setText(String.format("ATK: %d", lutemon.GetAttack()));
+        holder.defText.setText(String.format("DEF: %d", lutemon.GetDefense()));
     }
 
     @Override
     public int getItemCount() {
-        return Lutemons.size();
+        return lutemons.size();
     }
 }

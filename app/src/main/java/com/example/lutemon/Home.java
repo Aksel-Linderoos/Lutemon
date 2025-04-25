@@ -10,11 +10,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link Home#newInstance} factory method to
  * create an instance of this fragment.
  */
+
 public class Home extends Fragment {
 
     public Storage storage;
@@ -63,15 +65,15 @@ public class Home extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
+        View view = inflater.inflate(R.layout.fragment_home, container, false);
+        Context context = getContext();
 
         storage = Storage.getInstance();
-        recyclerView = recyclerView.findViewById(R.id.listLutemonsRV);
+        recyclerView = view.findViewById(R.id.listLutemonsRV);
 
-        Context context = getContext();
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
-        recyclerView.setAdapter(new LutemonListAdapter(context.getApplicationContext(), storage.getLutemons()));
-        return inflater.inflate(R.layout.fragment_home, container, false);
+        recyclerView.setAdapter(new LutemonListAdapter(context, storage.getLutemons()));
+        return view;
     }
 
 }

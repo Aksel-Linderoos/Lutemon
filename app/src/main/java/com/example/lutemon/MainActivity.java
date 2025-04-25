@@ -28,16 +28,16 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-        Lutemon lutemon = new Lutemon("ASD", LutemonType.GRASS);
-        Storage storage = Storage.getInstance();
-        storage.addLutemon(lutemon);
+        Lutemon lutemon = new Lutemon("gagagagagagagga", LutemonType.GRASS);
+        Storage.getInstance().addLutemon(lutemon);
+
         frameLayout = (FrameLayout) findViewById(R.id.framelayout);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
 
         tabLayout.selectTab(tabLayout.getTabAt(1));
         getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, new Home()).addToBackStack(null).commit();
 
-        tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
+        tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
 

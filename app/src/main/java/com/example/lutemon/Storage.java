@@ -1,12 +1,11 @@
 package com.example.lutemon;
 
-
 import java.util.ArrayList;
 
 public class Storage {
+    private ArrayList<Lutemon> lutemons = new ArrayList<Lutemon>();
+    private static Storage storage = null;
 
-    public ArrayList<Lutemon> Lutemons;
-    public static Storage storage = null;
     public static Storage getInstance(){
         if (storage == null) {
             storage = new Storage();
@@ -15,14 +14,12 @@ public class Storage {
     }
 
     ArrayList<Lutemon> getLutemons() {
-        return Lutemons;
+        return lutemons;
     }
 
-    public void addLutemon(Lutemon Lutemon){
-        Lutemons.add(Lutemon);
+    public void addLutemon(Lutemon lutemon){
+        lutemons.add(lutemon);
     }
-
-
 
 }
 
