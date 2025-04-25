@@ -38,6 +38,25 @@ public class Lutemon {
     public int GetLevel() { return this.level; }
     public int GetHealth() { return this.health; }
     public int GetMaxHealth() { return this.max_health; }
+    public int GetImage() {
+        int image = 0;
+        if (this.type == LutemonType.FIRE){
+            image = R.drawable.charmeleon;
+        }
+        else if (this.type == LutemonType.WATER){
+            image = R.drawable.blastoise;
+        }
+        else if (this.type == LutemonType.ELECTRIC){
+            image = R.drawable.pikachu;
+        }
+        else if (this.type == LutemonType.GHOST){
+            image = R.drawable.haunter;
+        }
+        else if (this.type == LutemonType.GRASS){
+            image = R.drawable.bulbasaur;
+        }
+        return image;
+    }
 
     public float GetAccuracy(int attack, int defense) {
         return Math.max(attack - defense * 0.5f, 0.f);

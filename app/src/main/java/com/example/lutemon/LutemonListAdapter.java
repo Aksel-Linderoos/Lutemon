@@ -14,6 +14,7 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> 
    private Context context;
    private ArrayList<Lutemon> lutemons;
 
+   Storage storage = Storage.getInstance();
    public LutemonListAdapter(Context context, ArrayList<Lutemon> lutemons){
         this.context= context;
         this.lutemons = lutemons;
@@ -33,6 +34,7 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> 
         holder.hpText.setText(String.format("HP: %d / %d", lutemon.GetHealth(), lutemon.GetMaxHealth()));
         holder.attackText.setText(String.format("ATK: %d", lutemon.GetAttack()));
         holder.defText.setText(String.format("DEF: %d", lutemon.GetDefense()));
+        holder.lutemonImage.setImageResource(lutemon.GetImage());
     }
 
     @Override
