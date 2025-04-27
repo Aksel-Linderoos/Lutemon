@@ -79,7 +79,8 @@ public class Lutemon {
     }
 
     public float GetAccuracy(int attack, int defense) {
-        return Math.max(attack - defense * 0.5f, 0.f);
+        float accuracy = (float)attack - (float)defense * 0.5f;
+        return Math.max(accuracy, 0.f);
     }
 
     private void TakeDamage(int damage) {
@@ -97,11 +98,16 @@ public class Lutemon {
         this.max_health += 3;
     }
 
+    public int GetExperienceNextLevel() {
+        return this.level * 100 + (int)Math.pow((double)this.level, 3);
+    }
+
     public void GainExperience(int experience) {
         this.experience += experience;
-        int new_level = this.experience / (this.level * 10 + 90);
+        int new_level = this.experience / GetExperienceNextLevel();
 
-        if (new_level != this.level) {
+        if (new_level > this.level) {
+            System.out.println("Level up!");
             int level_ups = new_level - this.level;
             this.level = new_level;
 
@@ -127,17 +133,17 @@ public class Lutemon {
 
         if (defender.type == vulnerable) {
             if (accuracy == 0) defender.health -= 2;
-            else defender.health -= (int)(accuracy * 2.f);
+            else defender.health -= (int)Math.ceil(accuracy * 2.f);
         }
 
         else if (defender.type == advantage) {
             if (accuracy == 0) defender.health -= 1;
-            else defender.health -= (int)(accuracy * 0.5f);
+            else defender.health -= (int)Math.ceil(accuracy * 0.5f);
         }
 
         else {
             if (accuracy == 0) defender.health -= 1;
-            else defender.health -= (int)(accuracy);
+            else defender.health -= (int)Math.ceil(accuracy);
         }
     }
 

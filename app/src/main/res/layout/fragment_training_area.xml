@@ -19,4 +19,56 @@
         app:layout_constraintTop_toTopOf="parent"
         app:layout_constraintVertical_bias="0.091" />
 
+    <ImageView
+        android:id="@+id/lutemonImageTrain"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/titleText"
+        app:layout_constraintVertical_bias="0.144"
+        tools:src="@tools:sample/avatars" />
+
+    <Button
+        android:id="@+id/trainButton"
+        android:layout_width="122dp"
+        android:layout_height="70dp"
+        android:onClick="Train"
+        android:text="Train"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lutemonImageTrain"
+        app:layout_constraintVertical_bias="0.613" />
+
+    <TextView
+        android:id="@+id/lutemonNameTrain"
+        android:layout_width="208dp"
+        android:layout_height="45dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="Name:"
+        app:layout_constraintBottom_toTopOf="@+id/trainButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.683"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lutemonImageTrain"
+        app:layout_constraintVertical_bias="0.326" />
+
+    <TextView
+        android:id="@+id/lutemonExpTrain"
+        android:layout_width="206dp"
+        android:layout_height="42dp"
+        android:scaleX="2"
+        android:scaleY="2"
+        android:text="Exp:"
+        app:layout_constraintBottom_toTopOf="@+id/trainButton"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.686"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/lutemonNameTrain"
+        app:layout_constraintVertical_bias="0.173" />
+
 </androidx.constraintlayout.widget.ConstraintLayout>
