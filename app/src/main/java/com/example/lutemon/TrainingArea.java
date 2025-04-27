@@ -7,6 +7,9 @@ import androidx.fragment.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +17,9 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class TrainingArea extends Fragment {
+    private ImageView image;
+    private TextView name;
+    private TextView exp;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -59,6 +65,31 @@ public class TrainingArea extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_training_area, container, false);
+        View view = inflater.inflate(R.layout.fragment_training_area, container, false);
+
+        this.image = view.findViewById(R.id.lutemonImageTrain);
+        this.name = view.findViewById(R.id.lutemonNameTrain);
+        this.exp = view.findViewById(R.id.lutemonExpTrain);
+
+        Button train = view.findViewById(R.id.trainButton);
+        train.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Lutemon selected = Storage.getInstance().getLutemons().get(0);
+                selected.GainExperience(1);
+                exp.setText(String.format("EXP: %d / %d", selected.GetExperience(), selected.GetExperienceNextLevel()));
+            }
+        });
+
+        SetStatistics();
+        return view;
     }
+
+    private void SetStatistics() {
+        Lutemon selected = Storage.getInstance().getLutemons().get(0);
+        image.setImageResource(selected.GetImage());
+        name.setText(String.format("NAME: %s", selected.GetName()));
+        exp.setText(String.format("EXP: %d / %d", selected.GetExperience(), selected.GetExperienceNextLevel()));
+    }
+
 }
