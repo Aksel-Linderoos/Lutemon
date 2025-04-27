@@ -152,4 +152,10 @@ public class Lutemon {
         this.defense *= 2;
     }
 
+    public boolean die(){
+        if (this.health <= 0){
+            return
+        }
+    }
+
 }
