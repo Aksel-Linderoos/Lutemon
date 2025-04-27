@@ -88,3 +88,4 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> 
         this.recycler = recyclerView;
     }
 }
+
