@@ -154,7 +154,22 @@ public class Lutemon {
 
     public boolean die(){
         if (this.health <= 0){
-            return
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public void RandomAttack(Lutemon defender) {
+        Random gen = new Random();
+
+        switch (gen.nextInt(3)) {
+            case 0: Attack(defender, false); return;
+            case 1: Attack(defender, true); return;
+            case 2: Defend(); return;
+            default:
+                System.out.println("error: could not pick a random attack.");
+                return;
         }
     }
 
