@@ -41,26 +41,40 @@ public class MainActivity extends AppCompatActivity {
         tabLayout.addOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
             @Override
             public void onTabSelected(TabLayout.Tab tab) {
-
+                Storage storage = Storage.getInstance();
                 Fragment fragment = null;
                 switch (tab.getPosition()) {
                     case 0:
-                        fragment = new TrainingArea();
-                        break;
+                        if (storage.getLutemons().isEmpty()) {
+                            fragment = new Home();
+                            tabLayout.selectTab(tabLayout.getTabAt(1));
+                            break;
+                        } else {
+                            fragment = new TrainingArea();
+                            break;
+                        }
+
                     case 1:
                         fragment = new Home();
                         break;
                     case 2:
-                        fragment = new BattleField();
-                        break;
+                        if (storage.getLutemons().isEmpty()) {
+                            fragment = new Home();
+                            tabLayout.selectTab(tabLayout.getTabAt(1));
+                            break;
+                        } else {
+                            fragment = new BattleField();
+                            break;
+                        }
                 }
-                getSupportFragmentManager()
-                        .beginTransaction()
-                        .replace(R.id.framelayout, fragment)
-                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
-                        .commit();
+                        getSupportFragmentManager()
+                                .beginTransaction()
+                                .replace(R.id.framelayout, fragment)
+                                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                                .commit();
 
-            }
+                }
+
 
             @Override
             public void onTabUnselected(TabLayout.Tab tab) {
