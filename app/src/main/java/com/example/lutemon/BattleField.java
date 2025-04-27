@@ -27,7 +27,8 @@ public class BattleField extends Fragment {
 
     private Lutemon lutemon;
     private Lutemon enemy;
-    private TextView hp1, hp2;
+    private TextView hp1, hp2, playerName, enemyName;
+
 
     private enum AttackType {
         ACCURATE,
@@ -93,7 +94,13 @@ public class BattleField extends Fragment {
 
         hp1 = view.findViewById(R.id.hp1);
         hp2 = view.findViewById(R.id.hp2);
+
         UpdateHealths();
+
+        playerName = view.findViewById(R.id.playerName);
+        playerName.setText(lutemon.GetName());
+        enemyName = view.findViewById(R.id.enemyName);
+        enemyName.setText(enemy.GetName());
 
         Button accurateAttackBtn = view.findViewById(R.id.accurateAttackBtn);
         accurateAttackBtn.setOnClickListener(new View.OnClickListener() {
