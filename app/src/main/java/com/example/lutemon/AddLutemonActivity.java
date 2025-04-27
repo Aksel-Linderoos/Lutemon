@@ -31,31 +31,23 @@ public class AddLutemonActivity extends AppCompatActivity {
         textInput = findViewById(R.id.lutemonName);
         String nameInput = String.valueOf(textInput.getText());
 
-        if (rgLutemonType.getCheckedRadioButtonId() == R.id.fireButton){
-           Lutemon lutemon = new Lutemon(nameInput, LutemonType.FIRE);
-            Storage.getInstance().addLutemon(lutemon);
+        Storage storage = Storage.getInstance();
+        int checkedRadioButtonId = rgLutemonType.getCheckedRadioButtonId();
 
+        if (checkedRadioButtonId == R.id.fireButton) {
+            storage.addLutemon(new Lutemon(nameInput, LutemonType.FIRE, 10));
+        } else if (checkedRadioButtonId == R.id.waterButton) {
+            storage.addLutemon(new Lutemon(nameInput, LutemonType.WATER, 10));
+        } else if (checkedRadioButtonId == R.id.grassButton) {
+            storage.addLutemon(new Lutemon(nameInput, LutemonType.GRASS, 10));
+        } else if (checkedRadioButtonId == R.id.electricButton) {
+            storage.addLutemon(new Lutemon(nameInput, LutemonType.ELECTRIC, 10));
+        } else if (checkedRadioButtonId == R.id.ghostButton) {
+            storage.addLutemon(new Lutemon(nameInput, LutemonType.GHOST, 10));
+        } else {
+            System.out.println("error: cant add lutemon without type.");
         }
-        else if (rgLutemonType.getCheckedRadioButtonId() == R.id.waterButton){
-            Lutemon lutemon = new Lutemon(nameInput, LutemonType.WATER);
-            Storage.getInstance().addLutemon(lutemon);
 
-        }
-        else if (rgLutemonType.getCheckedRadioButtonId() == R.id.grassButton){
-            Lutemon lutemon = new Lutemon(nameInput, LutemonType.GRASS);
-            Storage.getInstance().addLutemon(lutemon);
-
-        }
-        else if (rgLutemonType.getCheckedRadioButtonId() == R.id.electricButton){
-            Lutemon lutemon = new Lutemon(nameInput, LutemonType.ELECTRIC);
-            Storage.getInstance().addLutemon(lutemon);
-
-        }
-        else if (rgLutemonType.getCheckedRadioButtonId() == R.id.ghostButton){
-            Lutemon lutemon = new Lutemon(nameInput, LutemonType.GHOST);
-            Storage.getInstance().addLutemon(lutemon);
-
-        }
         Intent intent = new Intent(this, MainActivity.class);
         startActivity(intent);
 

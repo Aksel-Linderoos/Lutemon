@@ -15,19 +15,40 @@ public class Lutemon {
 
     public static int number_created = 0;
 
-    public Lutemon(String name, LutemonType type) {
+    public Lutemon(String name, LutemonType type, int max_health) {
         this.name = name;
         this.type = type;
         this.attack = 1;
         this.defense = 1;
         this.experience = 0;
         this.level = 1;
-        this.health = 10;
-        this.max_health = 10;
+        this.health = max_health;
+        this.max_health = max_health;
         this.is_blocking = false;
 
         Lutemon.number_created += 1;
-        Storage storage = Storage.getInstance();
+    }
+
+    public static Lutemon CreateEnemy() {
+        Random gen = new Random();
+
+        int max_health = 10 + BattleField.battles_won;
+        int pick = gen.nextInt(LutemonType.values().length - 1);
+        LutemonType type = LutemonType.values()[pick];
+
+        String name = null;
+        switch (type) {
+            case FIRE: name = "Lutmeleon"; break;
+            case WATER: name = "Lustoise"; break;
+            case ELECTRIC: name = "Lukachu"; break;
+            case GHOST: name = "Luaunter"; break;
+            case GRASS: name = "Lutbasaur"; break;
+            default:
+                System.out.println("error: unknown lutemon type.");
+                break;
+        }
+
+        return new Lutemon(name, type, max_health);
     }
 
     public String GetName() { return this.name; }

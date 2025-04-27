@@ -21,7 +21,7 @@ public class BattleField extends Fragment {
 
     ImageView lutemonImage1, lutemonImage2;
     TextView hp1, hp2;
-
+    public static int battles_won = 0;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
