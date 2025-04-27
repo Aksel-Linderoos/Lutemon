@@ -7,6 +7,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -19,8 +20,8 @@ import java.util.ArrayList;
  */
 public class BattleField extends Fragment {
 
-    ImageView lutemonImage1, lutemonImage2;
-    TextView hp1, hp2;
+    ArrayList<Lutemon> lutemons = Storage.getInstance().getLutemons();
+    Lutemon enemy = Lutemon.CreateEnemy();
     public static int battles_won = 0;
 
     // TODO: Rename parameter arguments, choose names that match
@@ -66,15 +67,45 @@ public class BattleField extends Fragment {
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
-        // Inflate the layout for this fragment
-        return inflater.inflate(R.layout.fragment_battle_field, container, false);
-
-
-    }
-    public void beginBattle(View view){
-        ArrayList<Lutemon> lutemons = Storage.getInstance().getLutemons();
-        lutemonImage1 = getView().findViewById(R.id.lutemonImage1);
+        View view = inflater.inflate(R.layout.fragment_battle_field, container, false);
+        ImageView lutemonImage1 = view.findViewById(R.id.lutemonImage1);
         lutemonImage1.setImageResource(lutemons.get(0).GetImage());
-        hp1.setText(lutemons.get(0).GetHealth());
+        TextView hp1 =view.findViewById(R.id.hp1);
+        hp1.setText(String.format("%d / %d", lutemons.get(0).GetHealth(), lutemons.get(0).GetMaxHealth()));
+        ImageView lutemonImage2 = view.findViewById(R.id.lutemonImage2);
+        lutemonImage2.setImageResource(enemy.GetImage());
+        TextView hp2 =view.findViewById(R.id.hp2);
+        hp2.setText(String.format("%d / %d", enemy.GetHealth(), enemy.GetMaxHealth()));
+        Button accurateAttackBtn = view.findViewById(R.id.accurateAttackBtn);
+        accurateAttackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lutemons.get(0).Attack(enemy, false);
+                TextView hp2 =view.findViewById(R.id.hp2);
+                hp2.setText(String.format("%d / %d", enemy.GetHealth(), enemy.GetMaxHealth()));
+            }
+        });
+        Button strongAttackBtn = view.findViewById(R.id.strongAttackBtn);
+        strongAttackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lutemons.get(0).Attack(enemy, true);
+                TextView hp2 =view.findViewById(R.id.hp2);
+                hp2.setText(String.format("%d / %d", enemy.GetHealth(), enemy.GetMaxHealth()));
+            }
+        });
+        Button defendBtn = view.findViewById(R.id.defendBtn);
+        accurateAttackBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                lutemons.get(0).Defend();
+            }
+        });
+        // Inflate the layout for this fragment
+
+        return view;
+
+
     }
+
 }
