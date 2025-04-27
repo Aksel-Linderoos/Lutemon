@@ -96,6 +96,7 @@ public class Lutemon {
         this.attack += 1;
         this.defense += 1;
         this.max_health += 3;
+        this.health += 3;
     }
 
     public int GetExperienceNextLevel() {
@@ -104,15 +105,11 @@ public class Lutemon {
 
     public void GainExperience(int experience) {
         this.experience += experience;
-        int new_level = this.experience / GetExperienceNextLevel();
 
-        if (new_level > this.level) {
+        if (this.experience > GetExperienceNextLevel()) {
             System.out.println("Level up!");
-            int level_ups = new_level - this.level;
-            this.level = new_level;
+            this.level += 1;
 
-            for (int i = 0; i < level_ups; ++i)
-                LevelUp();
         }
     }
 
