@@ -1,10 +1,8 @@
 package com.example.lutemon;
 
-import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.FragmentActivity;
 import androidx.fragment.app.FragmentTransaction;
 
@@ -16,27 +14,21 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import com.google.android.material.tabs.TabLayout;
 
-import java.util.ArrayList;
-
 /**
  * A simple {@link Fragment} subclass.
  * Use the {@link BattleField#newInstance} factory method to
  * create an instance of this fragment.
  */
 public class BattleField extends Fragment {
-
     private Lutemon lutemon;
     private Lutemon enemy;
     private TextView hp1, hp2, playerName, enemyName;
-
 
     private enum AttackType {
         ACCURATE,
         STRONG,
         DEFEND,
     };
-
-    public static int battles_won = 0;
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -84,7 +76,7 @@ public class BattleField extends Fragment {
         View view = inflater.inflate(R.layout.fragment_battle_field, container, false);
 
         lutemon =  Storage.getInstance().getLutemons().get(0);
-        enemy = Lutemon.CreateEnemy();
+        enemy = Lutemon.CreateEnemy(lutemon.GetWins());
 
         ImageView lutemonImage1 = view.findViewById(R.id.lutemonImage1);
         lutemonImage1.setImageResource(lutemon.GetImage());
@@ -140,9 +132,9 @@ public class BattleField extends Fragment {
         }
 
         if (enemy.GetHealth() <= 0) {
-            BattleField.battles_won += 1;
+            lutemon.AddWin();
             System.out.println("You won!");
-            lutemon.GainExperience((BattleField.battles_won + 1) * 150);
+            lutemon.GainExperience((lutemon.GetWins() + 1) * 150);
             BackToHome();
         }
 
