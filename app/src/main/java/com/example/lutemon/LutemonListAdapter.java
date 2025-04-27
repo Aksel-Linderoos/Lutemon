@@ -64,6 +64,17 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> 
                 }
             }
         });
+
+        holder.feedButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Storage storage = Storage.getInstance();
+                storage.getLutemons().get(holder.getAdapterPosition()).fullHeal();
+                RecyclerView.Adapter adapter = recycler.getAdapter();
+                adapter.notifyItemChanged(holder.getAdapterPosition());
+
+            }
+        });
     }
 
     @Override

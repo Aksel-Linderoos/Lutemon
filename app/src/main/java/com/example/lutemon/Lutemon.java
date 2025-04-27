@@ -113,6 +113,10 @@ public class Lutemon {
         }
     }
 
+    public void fullHeal(){
+        this.health = this.max_health;
+    }
+
     public void Attack(Lutemon defender, boolean try_strong) {
         float accuracy = GetAccuracy(this.attack, defender.defense);
 
