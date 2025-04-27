@@ -1,8 +1,9 @@
 package com.example.lutemon;
 
+import java.io.Serializable;
 import java.util.Random;
 
-public class Lutemon {
+public class Lutemon implements Serializable {
     private String name;
     private LutemonType type;
     private int attack;
@@ -138,17 +139,17 @@ public class Lutemon {
 
         if (defender.type == vulnerable) {
             if (accuracy == 0) defender.health -= 2;
-            else defender.health -= (int)Math.ceil(accuracy * 2.f);
+            else defender.TakeDamage((int)Math.ceil(accuracy * 2.f));
         }
 
         else if (defender.type == advantage) {
             if (accuracy == 0) defender.health -= 1;
-            else defender.health -= (int)Math.ceil(accuracy * 0.5f);
+            else defender.TakeDamage((int)Math.ceil(accuracy * 0.5f));
         }
 
         else {
             if (accuracy == 0) defender.health -= 1;
-            else defender.health -= (int)Math.ceil(accuracy);
+            else defender.TakeDamage((int)Math.ceil(accuracy));
         }
     }
 

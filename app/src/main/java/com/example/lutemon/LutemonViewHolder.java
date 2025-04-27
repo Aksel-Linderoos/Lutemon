@@ -9,7 +9,7 @@ import android.widget.TextView;
 import android.widget.ImageView;
 
 public class LutemonViewHolder extends RecyclerView.ViewHolder {
-    TextView nameText, levelText, hpText, attackText, defText;
+    TextView nameText, levelText, hpText, attackText, defText, expText, winsText;
     ImageButton deleteButton, selectButton, feedButton;
     ImageView lutemonImage;
 
@@ -24,6 +24,8 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
         selectButton = itemView.findViewById(R.id.selectButton);
         feedButton = itemView.findViewById(R.id.feedButton);
         lutemonImage = itemView.findViewById(R.id.lutemonImage);
+        expText = itemView.findViewById(R.id.expText);
+        winsText = itemView.findViewById(R.id.winsText);
     }
 
 }

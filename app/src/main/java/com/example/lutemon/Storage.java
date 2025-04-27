@@ -17,6 +17,10 @@ public class Storage {
         return lutemons;
     }
 
+    public void SetLutemons(ArrayList<Lutemon> lutemons) {
+        this.lutemons = lutemons;
+    }
+
     public void addLutemon(Lutemon lutemon){
         lutemons.add(lutemon);
     }

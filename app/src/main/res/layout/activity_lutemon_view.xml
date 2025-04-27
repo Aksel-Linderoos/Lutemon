@@ -75,14 +75,6 @@
                 android:textSize="20sp" />
 
             <TextView
-                android:id="@+id/levelText"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:text="Level"
-                android:textAlignment="center"
-                android:textSize="20sp" />
-
-            <TextView
                 android:id="@+id/hpText"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -103,6 +95,30 @@
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:text="Defence : x"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/winsText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Wins : x"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/levelText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Level"
+                android:textAlignment="center"
+                android:textSize="20sp" />
+
+            <TextView
+                android:id="@+id/expText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="Exp / LvlUpExp"
                 android:textAlignment="center"
                 android:textSize="20sp" />
 

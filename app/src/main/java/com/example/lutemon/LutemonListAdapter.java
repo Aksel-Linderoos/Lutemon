@@ -38,6 +38,8 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> 
         holder.attackText.setText(String.format("ATK: %d", lutemon.GetAttack()));
         holder.defText.setText(String.format("DEF: %d", lutemon.GetDefense()));
         holder.lutemonImage.setImageResource(lutemon.GetImage());
+        holder.winsText.setText(String.format("WINS: %d", lutemon.GetWins()));
+        holder.expText.setText(String.format("EXP: %d / %d", lutemon.GetExperience(), lutemon.GetExperienceNextLevel()));
 
         holder.selectButton.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -46,9 +48,7 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> 
                 Collections.swap(storage.getLutemons(), 0, holder.getAdapterPosition());
 
                 RecyclerView.Adapter adapter = recycler.getAdapter();
-                if (adapter != null) {
-                    adapter.notifyItemMoved(holder.getAdapterPosition(), 0);
-                }
+                adapter.notifyItemMoved(holder.getAdapterPosition(), 0);
             }
         });
 
@@ -59,9 +59,7 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> 
                 storage.getLutemons().remove(holder.getAdapterPosition());
 
                 RecyclerView.Adapter adapter = recycler.getAdapter();
-                if (adapter != null) {
-                    adapter.notifyItemRemoved(holder.getAdapterPosition());
-                }
+                adapter.notifyItemRemoved(holder.getAdapterPosition());
             }
         });
 
@@ -72,7 +70,6 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> 
                 storage.getLutemons().get(holder.getAdapterPosition()).fullHeal();
                 RecyclerView.Adapter adapter = recycler.getAdapter();
                 adapter.notifyItemChanged(holder.getAdapterPosition());
-
             }
         });
     }
