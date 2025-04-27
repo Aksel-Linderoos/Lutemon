@@ -4,6 +4,7 @@ import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 import android.view.View;
+import java.util.Collections;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -14,8 +15,8 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> 
 
    private Context context;
    private ArrayList<Lutemon> lutemons;
+   private RecyclerView recycler;
 
-   Storage storage = Storage.getInstance();
    public LutemonListAdapter(Context context, ArrayList<Lutemon> lutemons){
         this.context= context;
         this.lutemons = lutemons;
@@ -37,10 +38,42 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> 
         holder.attackText.setText(String.format("ATK: %d", lutemon.GetAttack()));
         holder.defText.setText(String.format("DEF: %d", lutemon.GetDefense()));
         holder.lutemonImage.setImageResource(lutemon.GetImage());
+
+        holder.selectButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Storage storage = Storage.getInstance();
+                Collections.swap(storage.getLutemons(), 0, holder.getAdapterPosition());
+
+                RecyclerView.Adapter adapter = recycler.getAdapter();
+                if (adapter != null) {
+                    adapter.notifyItemMoved(holder.getAdapterPosition(), 0);
+                }
+            }
+        });
+
+        holder.deleteButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Storage storage = Storage.getInstance();
+                storage.getLutemons().remove(holder.getAdapterPosition());
+
+                RecyclerView.Adapter adapter = recycler.getAdapter();
+                if (adapter != null) {
+                    adapter.notifyItemRemoved(holder.getAdapterPosition());
+                }
+            }
+        });
     }
 
     @Override
     public int getItemCount() {
         return lutemons.size();
+    }
+
+    @Override
+    public void onAttachedToRecyclerView(@NonNull RecyclerView recyclerView) {
+        super.onAttachedToRecyclerView(recyclerView);
+        this.recycler = recyclerView;
     }
 }
