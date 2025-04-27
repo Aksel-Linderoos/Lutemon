@@ -18,9 +18,9 @@ import androidx.fragment.app.FragmentTransaction;
 import com.google.android.material.tabs.TabLayout;
 
 public class MainActivity extends AppCompatActivity {
-
     FrameLayout frameLayout;
     TabLayout tabLayout;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -31,15 +31,6 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
-
-//        Lutemon lutemon1 = new Lutemon("13", LutemonType.WATER);
-//        Storage.getInstance().addLutemon(lutemon1);
-//        Lutemon lutemon4 = new Lutemon("2", LutemonType.FIRE);
-//        Storage.getInstance().addLutemon(lutemon4);
-//        Lutemon lutemon3 = new Lutemon("3", LutemonType.GRASS);
-//        Storage.getInstance().addLutemon(lutemon3);
-//        Lutemon lutemon2 = new Lutemon("4", LutemonType.GHOST);
-//        Storage.getInstance().addLutemon(lutemon2);
 
         frameLayout = (FrameLayout) findViewById(R.id.framelayout);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);

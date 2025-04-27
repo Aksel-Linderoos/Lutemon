@@ -12,6 +12,7 @@ public class Lutemon {
     private int health;
     private int max_health;
     private boolean is_blocking;
+    private int wins;
 
     public static int number_created = 0;
 
@@ -25,14 +26,15 @@ public class Lutemon {
         this.health = max_health;
         this.max_health = max_health;
         this.is_blocking = false;
+        this.wins = 0;
 
         Lutemon.number_created += 1;
     }
 
-    public static Lutemon CreateEnemy() {
+    public static Lutemon CreateEnemy(int wins) {
         Random gen = new Random();
 
-        int max_health = 10 + BattleField.battles_won;
+        int max_health = 10 + wins;
         int pick = gen.nextInt(LutemonType.values().length - 1);
         LutemonType type = LutemonType.values()[pick];
 
@@ -59,6 +61,8 @@ public class Lutemon {
     public int GetLevel() { return this.level; }
     public int GetHealth() { return this.health; }
     public int GetMaxHealth() { return this.max_health; }
+    public int GetWins() { return this.wins; }
+    public void AddWin() { this.wins += 1; }
 
     public int GetImage() {
         switch (this.type) {
@@ -106,10 +110,10 @@ public class Lutemon {
     public void GainExperience(int experience) {
         this.experience += experience;
 
-        if (this.experience > GetExperienceNextLevel()) {
+        while (this.experience >= GetExperienceNextLevel()) {
             System.out.println("Level up!");
             this.level += 1;
-
+            LevelUp();
         }
     }
 
@@ -151,14 +155,6 @@ public class Lutemon {
     public void Defend() {
         this.is_blocking = true;
         this.defense *= 2;
-    }
-
-    public boolean die(){
-        if (this.health <= 0){
-            return true;
-        } else {
-            return false;
-        }
     }
 
     public void RandomAttack(Lutemon defender) {
