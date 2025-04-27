@@ -3,10 +3,14 @@ package com.example.lutemon;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
-
+import androidx.appcompat.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ImageView;
+import android.widget.TextView;
+
+import java.util.ArrayList;
 
 /**
  * A simple {@link Fragment} subclass.
@@ -14,6 +18,10 @@ import android.view.ViewGroup;
  * create an instance of this fragment.
  */
 public class BattleField extends Fragment {
+
+    ImageView lutemonImage1, lutemonImage2;
+    TextView hp1, hp2;
+
 
     // TODO: Rename parameter arguments, choose names that match
     // the fragment initialization parameters, e.g. ARG_ITEM_NUMBER
@@ -60,5 +68,13 @@ public class BattleField extends Fragment {
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_battle_field, container, false);
+
+
+    }
+    public void beginBattle(View view){
+        ArrayList<Lutemon> lutemons = Storage.getInstance().getLutemons();
+        lutemonImage1 = getView().findViewById(R.id.lutemonImage1);
+        lutemonImage1.setImageResource(lutemons.get(0).GetImage());
+        hp1.setText(lutemons.get(0).GetHealth());
     }
 }

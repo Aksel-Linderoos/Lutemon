@@ -1,14 +1,83 @@
 <?xml version="1.0" encoding="utf-8"?>
 <FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     tools:context=".BattleField">
 
-    <!-- TODO: Update blank fragment layout -->
-    <TextView
+    <androidx.constraintlayout.widget.ConstraintLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:text="testi battlefield" />
+        android:layout_height="match_parent">
 
+        <ImageView
+            android:id="@+id/lutemonImage1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            android:layout_marginTop="300dp"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:src="@tools:sample/avatars" />
+
+        <ImageView
+            android:id="@+id/lutemonImage2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="52dp"
+            app:layout_constraintStart_toEndOf="@+id/lutemonImage1"
+            tools:layout_editor_absoluteY="300dp"
+            tools:src="@tools:sample/avatars" />
+
+        <Button
+            android:id="@+id/button2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Accurate attack"
+            tools:layout_editor_absoluteX="47dp"
+            tools:layout_editor_absoluteY="498dp" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Defend"
+            tools:layout_editor_absoluteX="170dp"
+            tools:layout_editor_absoluteY="560dp" />
+
+        <Button
+            android:id="@+id/button4"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="Strong attack"
+            tools:layout_editor_absoluteX="225dp"
+            tools:layout_editor_absoluteY="498dp" />
+
+        <TextView
+            android:id="@+id/hp1"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="HP"
+            app:layout_constraintTop_toBottomOf="@+id/lutemonImage1"
+            tools:layout_editor_absoluteX="103dp" />
+
+        <TextView
+            android:id="@+id/hp2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="16dp"
+            android:text="HP"
+            app:layout_constraintTop_toBottomOf="@+id/lutemonImage2"
+            tools:layout_editor_absoluteX="286dp" />
+
+        <Button
+            android:id="@+id/button5"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="beginBattle"
+            android:text="Button"
+            tools:layout_editor_absoluteX="149dp"
+            tools:layout_editor_absoluteY="56dp" />
+    </androidx.constraintlayout.widget.ConstraintLayout>
 </FrameLayout>
