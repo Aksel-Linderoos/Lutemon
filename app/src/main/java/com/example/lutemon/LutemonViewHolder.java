@@ -24,7 +24,6 @@ public class LutemonViewHolder extends RecyclerView.ViewHolder {
         selectButton = itemView.findViewById(R.id.selectButton);
         feedButton = itemView.findViewById(R.id.feedButton);
         lutemonImage = itemView.findViewById(R.id.lutemonImage);
-
     }
 
 }

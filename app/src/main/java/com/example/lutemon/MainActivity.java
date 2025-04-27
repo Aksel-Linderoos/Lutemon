@@ -28,7 +28,6 @@ public class MainActivity extends AppCompatActivity {
             return insets;
         });
 
-
         Lutemon lutemon1 = new Lutemon("13", LutemonType.WATER);
         Storage.getInstance().addLutemon(lutemon1);
         Lutemon lutemon4 = new Lutemon("2", LutemonType.FIRE);

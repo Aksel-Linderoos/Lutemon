@@ -3,6 +3,7 @@ package com.example.lutemon;
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
+import android.view.View;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
@@ -29,6 +30,7 @@ public class LutemonListAdapter extends RecyclerView.Adapter<LutemonViewHolder> 
     @Override
     public void onBindViewHolder(@NonNull LutemonViewHolder holder, int position) {
         Lutemon lutemon = lutemons.get(position);
+
         holder.nameText.setText(String.format("NAME: %s", lutemon.GetName()));
         holder.levelText.setText(String.format("LVL: %d", lutemon.GetLevel()));
         holder.hpText.setText(String.format("HP: %d / %d", lutemon.GetHealth(), lutemon.GetMaxHealth()));

@@ -38,24 +38,23 @@ public class Lutemon {
     public int GetLevel() { return this.level; }
     public int GetHealth() { return this.health; }
     public int GetMaxHealth() { return this.max_health; }
+
     public int GetImage() {
-        int image = 0;
-        if (this.type == LutemonType.FIRE){
-            image = R.drawable.charmeleon;
+        switch (this.type) {
+            case FIRE:
+                return R.drawable.charmeleon;
+            case WATER:
+                return R.drawable.blastoise;
+            case ELECTRIC:
+                return R.drawable.pikachu;
+            case GHOST:
+                return R.drawable.haunter;
+            case GRASS:
+                return R.drawable.bulbasaur;
+            default:
+                System.out.println("error: unknown lutemon type.");
+                return 0;
         }
-        else if (this.type == LutemonType.WATER){
-            image = R.drawable.blastoise;
-        }
-        else if (this.type == LutemonType.ELECTRIC){
-            image = R.drawable.pikachu;
-        }
-        else if (this.type == LutemonType.GHOST){
-            image = R.drawable.haunter;
-        }
-        else if (this.type == LutemonType.GRASS){
-            image = R.drawable.bulbasaur;
-        }
-        return image;
     }
 
     public float GetAccuracy(int attack, int defense) {
