@@ -24,7 +24,6 @@ public class Home extends Fragment {
 
     public Storage storage;
     private RecyclerView recyclerView;
-    private static boolean first_time = true;
 
     public Home() {
         // Required empty public constructor
@@ -44,50 +43,21 @@ public class Home extends Fragment {
         storage = Storage.getInstance();
         recyclerView = view.findViewById(R.id.listLutemonsRV);
 
-        if (Home.first_time) {
-            System.out.println("Deserializing.");
-            try {
-                FileInputStream file = context.getApplicationContext().openFileInput("save.data");
-                ObjectInputStream stream = new ObjectInputStream(file);
-                Object object = stream.readObject();
-                stream.close();
-                file.close();
+        System.out.println("Serializing save data.");
+        try {
+            FileOutputStream file = context.getApplicationContext().openFileOutput("save.data", Context.MODE_PRIVATE);
+            ObjectOutputStream stream = new ObjectOutputStream(file);
 
-                storage.SetLutemons((ArrayList<Lutemon>)object);
+            stream.writeObject(storage.getLutemons());
 
-            } catch (FileNotFoundException ex) {
-                System.out.println("error: file not found.");
-                ex.printStackTrace();
-            } catch (Exception ex) {
-                System.out.println("error: ");
-                ex.printStackTrace();
-            }
+            stream.flush();
+            file.flush();
+            stream.close();
+            file.close();
 
-        } else {
-            System.out.println("Serializing.");
-            try {
-                ByteArrayOutputStream bytes = new ByteArrayOutputStream();
-                ObjectOutputStream stream = new ObjectOutputStream(bytes);
-                stream.writeObject(storage.getLutemons());
-                stream.flush();
-                bytes.flush();
-                stream.close();
-
-                FileOutputStream file = context.getApplicationContext().openFileOutput("save.data", Context.MODE_PRIVATE);
-                file.write(bytes.toByteArray());
-                file.close();
-                bytes.close();
-
-            } catch (FileNotFoundException ex) {
-                System.out.println("error: file not found.");
-                ex.printStackTrace();
-            } catch (Exception ex) {
-                System.out.println("error: ");
-                ex.printStackTrace();
-            }
+        } catch (Exception ex) {
+            ex.printStackTrace();
         }
-
-
 
         recyclerView.setLayoutManager(new LinearLayoutManager(context));
         recyclerView.setAdapter(new LutemonListAdapter(context, storage.getLutemons()));

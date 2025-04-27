@@ -17,9 +17,15 @@ import androidx.fragment.app.FragmentTransaction;
 
 import com.google.android.material.tabs.TabLayout;
 
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.ObjectInputStream;
+import java.util.ArrayList;
+
 public class MainActivity extends AppCompatActivity {
     FrameLayout frameLayout;
     TabLayout tabLayout;
+    private static boolean init = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -31,6 +37,23 @@ public class MainActivity extends AppCompatActivity {
             v.setPadding(systemBars.left, systemBars.top, systemBars.right, systemBars.bottom);
             return insets;
         });
+
+        if (!MainActivity.init) {
+            MainActivity.init = true;
+            System.out.println("Deserializing save data.");
+            try {
+                FileInputStream file = getApplicationContext().openFileInput("save.data");
+                ObjectInputStream stream = new ObjectInputStream(file);
+                Object object = stream.readObject();
+                stream.close();
+                file.close();
+
+                Storage.getInstance().SetLutemons((ArrayList<Lutemon>) object);
+
+            } catch (Exception ex) {
+                ex.printStackTrace();
+            }
+        }
 
         frameLayout = (FrameLayout) findViewById(R.id.framelayout);
         tabLayout = (TabLayout) findViewById(R.id.tablayout);
