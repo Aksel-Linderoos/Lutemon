@@ -1,6 +1,7 @@
 package com.example.lutemon;
 
 import android.content.Context;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
@@ -75,5 +76,10 @@ public class Home extends Fragment {
         recyclerView.setAdapter(new LutemonListAdapter(context, storage.getLutemons()));
         return view;
     }
+    public void switchToAddLutemon(View view) {
+        Intent intent = new Intent(getActivity(), AddLutemonActivity.class);
+        startActivity(intent);
+    }
+
 
 }

@@ -6,14 +6,24 @@
     tools:context=".Home">
 
     <!-- TODO: Update blank fragment layout -->
-    <TextView
+
+    <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:text="testi home" />
+        android:orientation="vertical">
 
-    <androidx.recyclerview.widget.RecyclerView
-        android:id="@+id/listLutemonsRV"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent" />
+        <Button
+            android:id="@+id/addLutemonButton"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:onClick="switchToAddLutemon"
+            android:text="Add new Lutemon" />
+
+        <androidx.recyclerview.widget.RecyclerView
+            android:id="@+id/listLutemonsRV"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent" />
+
+    </LinearLayout>
 
 </FrameLayout>
