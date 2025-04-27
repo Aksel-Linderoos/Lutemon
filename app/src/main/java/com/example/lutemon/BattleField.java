@@ -1,15 +1,20 @@
 package com.example.lutemon;
 
+import android.app.Activity;
 import android.os.Bundle;
 
 import androidx.fragment.app.Fragment;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.FragmentActivity;
+import androidx.fragment.app.FragmentTransaction;
+
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
+import com.google.android.material.tabs.TabLayout;
 
 import java.util.ArrayList;
 
@@ -93,34 +98,18 @@ public class BattleField extends Fragment {
         Button accurateAttackBtn = view.findViewById(R.id.accurateAttackBtn);
         accurateAttackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                lutemon.Attack(enemy, false);
-                enemy.RandomAttack(lutemon);
-                UpdateHealths();
-            }
+            public void onClick(View v) { AttackTurn(AttackType.ACCURATE); }
         });
         Button strongAttackBtn = view.findViewById(R.id.strongAttackBtn);
         strongAttackBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                lutemon.Attack(enemy, true);
-
-
-                enemy.RandomAttack(lutemon);
-
-                UpdateHealths();
-            }
+            public void onClick(View v) { AttackTurn(AttackType.STRONG); }
         });
         Button defendBtn = view.findViewById(R.id.defendBtn);
-        accurateAttackBtn.setOnClickListener(new View.OnClickListener() {
+        defendBtn.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View v) {
-                lutemon.Defend();
-                enemy.RandomAttack(lutemon);
-                UpdateHealths();
-            }
+            public void onClick(View v) { AttackTurn(AttackType.DEFEND); }
         });
-        // Inflate the layout for this fragment
 
         return view;
     }
@@ -132,14 +121,44 @@ public class BattleField extends Fragment {
 
     private void AttackTurn(AttackType attack) {
         switch (attack) {
-            case ACCURATE: lutemon.Attack(enemy, false); break;
-            case STRONG: lutemon.Attack(enemy, true); break;
-            case DEFEND: lutemon.Defend(); break;
+            case ACCURATE:
+                lutemon.Attack(enemy, false);
+                break;
+            case STRONG:
+                lutemon.Attack(enemy, true);
+                break;
+            case DEFEND:
+                lutemon.Defend();
+                break;
         }
 
         if (enemy.GetHealth() <= 0) {
-
+            BattleField.battles_won += 1;
+            System.out.println("You won!");
+            lutemon.GainExperience((BattleField.battles_won + 1) * 150);
+            BackToHome();
         }
+
+        enemy.RandomAttack(lutemon);
+
+        if (lutemon.GetHealth() <= 0) {
+            System.out.println("You lost.");
+            BackToHome();
+        }
+
+        UpdateHealths();
+    }
+
+    private void BackToHome() {
+        FragmentActivity activity = getActivity();
+        TabLayout tabs = activity.findViewById(R.id.tablayout);
+        tabs.selectTab(tabs.getTabAt(1));
+
+        activity.getSupportFragmentManager()
+                .beginTransaction()
+                .replace(R.id.framelayout, new Home())
+                .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                .commit();
     }
 
 }

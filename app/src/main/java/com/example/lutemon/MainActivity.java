@@ -63,7 +63,11 @@ public class MainActivity extends AppCompatActivity {
                         fragment = new BattleField();
                         break;
                 }
-                getSupportFragmentManager().beginTransaction().replace(R.id.framelayout, fragment).setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN).commit();
+                getSupportFragmentManager()
+                        .beginTransaction()
+                        .replace(R.id.framelayout, fragment)
+                        .setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN)
+                        .commit();
 
             }
 
