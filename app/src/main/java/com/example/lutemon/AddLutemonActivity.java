@@ -1,6 +1,7 @@
 package com.example.lutemon;
 
 import android.os.Bundle;
+import android.widget.RadioGroup;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
@@ -21,4 +22,9 @@ public class AddLutemonActivity extends AppCompatActivity {
             return insets;
         });
     }
+
+    RadioGroup rgLutemonType = findViewById(R.id.lutemonType);
+
+
+    if
 }

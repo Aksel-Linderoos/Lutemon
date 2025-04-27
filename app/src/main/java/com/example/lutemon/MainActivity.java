@@ -1,6 +1,10 @@
 package com.example.lutemon;
 
+import static android.app.PendingIntent.getActivity;
+
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.View;
 import android.widget.FrameLayout;
 
 import androidx.activity.EdgeToEdge;
@@ -73,5 +77,9 @@ public class MainActivity extends AppCompatActivity {
 
             }
         });
+    }
+    public void switchToAddLutemon(View view) {
+        Intent intent = new Intent(this, AddLutemonActivity.class);
+        startActivity(intent);
     }
 }
